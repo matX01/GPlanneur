@@ -50,22 +50,22 @@ def Display(positionY,vitesseVerticale,vx_new,h):
     # display text
     
     
-    vitesse_verticale = arial_font.render('VS: {}'.format(vitesseVerticale), True, (0,0,0) )
+    vitesse_verticale = arial_font.render('VS: {:.2f}'.format(vitesseVerticale), True, (0,0,0) )
     
     window_surface.blit(vitesse_verticale,(30,30))
 
-    vitesse_horizontal = arial_font.render('VH: {}'.format(vx_new), True, (0,0,0) )
+    vitesse_horizontal = arial_font.render('VH: {:.2f}'.format(vx_new), True, (0,0,0) )
     
     window_surface.blit(vitesse_horizontal,(30,70))
 
     
     
-    Haltitude = arial_font.render('H: {}'.format(h), True, (0,0,0) )
+    Haltitude = arial_font.render('H: {:.2f}'.format(h), True, (0,0,0) )
     
     window_surface.blit(Haltitude,(30,110))
  
 
-    assiette = arial_font.render('H: {}'.format(positionY), True, (0,0,0) )
+    assiette = arial_font.render('H: {:.2f}'.format(positionY), True, (0,0,0) )
     
     window_surface.blit(assiette,(30,160))
 

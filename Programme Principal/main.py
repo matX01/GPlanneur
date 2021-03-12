@@ -29,12 +29,7 @@ def __main__():
  
         A = Physics.ExecuteEuler(WindowEvent.YaxisValue)
     
-    
-    
-
-    print(A)
-    
-    
+  
     GraphicPane.Display(WindowEvent.YaxisValue/100,A[3],A[2],A[1])
     WindowEvent.Actualise()
     
