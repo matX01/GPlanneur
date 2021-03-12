@@ -31,8 +31,11 @@ def __main__():
     
     
     
+
     print(A)
-    GraphicPane.Display(WindowEvent.YaxisValue/100,1000,1000,1000)
+    
+    
+    GraphicPane.Display(WindowEvent.YaxisValue/100,A[3],A[2],A[1])
     WindowEvent.Actualise()
     
     
