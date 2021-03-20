@@ -1,0 +1,119 @@
+from dataclasses import dataclass
+from typing import List
+import math
+@dataclass
+class Point:                                                                    # Le point , constitué de 3 valeurs x , y , z
+    Coords: List[float]
+    
+@dataclass
+class Vertex:                                                                   # le vertex , un triangle sans volume constitué de trois points
+    p: List[Point]
+    
+@dataclass
+class mesh:                                                                     # le mesh , un ensemble de vertex permettant de former un polygone en 3 dimensions.
+    v: List[Vertex]
+
+
+
+
+cube = mesh([
+    #South
+    Vertex([
+        Point([0,0,0]),
+        Point([0,1,0]),
+        Point([1,1,0])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([1,1,0]),
+        Point([1,0,0])
+    ]),
+    
+    #east
+    Vertex([
+        Point([1,0,0]),
+        Point([1,1,0]),
+        Point([1,1,1])
+    ]),
+    Vertex([
+        Point([1,0,0]),
+        Point([1,1,1]),
+        Point([1,0,1])
+    ]),
+    
+    #north
+    Vertex([
+        Point([1,0,1]),
+        Point([1,1,1]),
+        Point([0,0,1])
+    ]),
+    Vertex([
+        Point([1,0,1]),
+        Point([0,1,1]),
+        Point([0,0,1])
+    ]),
+    
+    #west
+    Vertex([
+        Point([0,0,1]),
+        Point([0,1,1]),
+        Point([0,1,0])
+    ]),
+    Vertex([
+        Point([0,0,1]),
+        Point([0,1,0]),
+        Point([0,0,0])
+    ]),
+    
+    #top
+    Vertex([
+        Point([0,1,0]),
+        Point([0,1,1]),
+        Point([1,1,1])
+    ]),
+    Vertex([
+        Point([0,1,0]),
+        Point([1,1,1]),
+        Point([1,1,0])
+    ]),
+    
+    #bottom
+    Vertex([
+        Point([1,0,1]),
+        Point([0,0,1]),
+        Point([0,0,0])
+    ]),
+    Vertex([
+        Point([1,0,1]),
+        Point([0,0,0]),
+        Point([1,0,0])
+    ])
+])
+
+square = mesh([
+    #South
+    Vertex([
+        Point([0,0,0]),
+        Point([0,1,0]),
+        Point([1,1,0])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([1,1,0]),
+        Point([1,0,0])
+    ])
+])
+
+ProjectedSquare = mesh([
+    #South
+    Vertex([
+        Point([0,0,0]),
+        Point([1/2,math.sqrt(3)/2,0]),
+        Point([((1+math.sqrt(3))/2),(math.sqrt(3)-1)/2,0])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([((1+math.sqrt(3))/2),((math.sqrt(3)-1)/2),0]),
+        Point([(math.sqrt(3)/2),-1/2,0])
+    ])
+])

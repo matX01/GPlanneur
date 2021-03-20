@@ -231,17 +231,36 @@ def rotateVertex(vertex,point,Angle):
     Point2Module = math.sqrt((vertex.p[1].Coords[0]-point.Coords[0])**2+(vertex.p[1].Coords[1]-point.Coords[1])**2)
     Point3Module = math.sqrt((vertex.p[2].Coords[0]-point.Coords[0])**2+(vertex.p[2].Coords[1]-point.Coords[1])**2)
     Point1BaseArg = 0
+    Point2BaseArg = 0
+    Point3BaseArg = 0
     try:
+
         Point1BaseArg = math.acos((vertex.p[0].Coords[0]-point.Coords[0])/Point1Module)
+
+    except:
+        pass
+    try:
+
+        Point2BaseArg = math.acos((vertex.p[1].Coords[0]-point.Coords[0])/Point2Module)
+
+    except:
+        pass
+    try:
+
+        Point3BaseArg = math.acos((vertex.p[2].Coords[0]-point.Coords[0])/Point3Module)
+
     except:
         pass
 
-    Point2BaseArg = math.acos((vertex.p[1].Coords[0]-point.Coords[0])/Point2Module)
-    Point3BaseArg = math.acos((vertex.p[2].Coords[0]-point.Coords[0])/Point3Module)
+
+
+
     return Vertex([
+    
         Point([Point1Module*math.cos(Point1BaseArg+Angle),Point1Module*math.sin(Point1BaseArg+Angle),vertex.p[0].Coords[2]]),
         Point([Point2Module*math.cos(Point2BaseArg+Angle),Point2Module*math.sin(Point2BaseArg+Angle),vertex.p[1].Coords[2]]),
         Point([Point3Module*math.cos(Point3BaseArg+Angle),Point3Module*math.sin(Point3BaseArg+Angle),vertex.p[2].Coords[2]])
+    
     ])
 
 
@@ -251,13 +270,13 @@ def rotateVertex(vertex,point,Angle):
 for vertex in cube.v:
         for points in vertex.p:
             points.Coords[2] += 5
-            points.Coords[0] -=1
-            points.Coords[1] +=2
+            points.Coords[0] -= 5
+            points.Coords[1] +=0
     
 
 cube2 = copy.deepcopy([cube])
 
-
+theta = 0
 spd = 5
 ui = True
 while WHandler.ProgramRunning:
@@ -310,9 +329,10 @@ while WHandler.ProgramRunning:
         DrawVertex(ProjectVertex(vertex),WHandler.White)
     
     """
+    theta += math.pi/256
     for vertex in cube.v:
         
-        DrawVertex(ProjectVertex(rotateVertex(vertex,Point([0,0,5]),math.pi/6)),WHandler.White)
+        DrawVertex(ProjectVertex(rotateVertex(vertex,Point([-5,0,5]),theta)),WHandler.White)
     
     """
     if(WHandler.SpaceToken):
