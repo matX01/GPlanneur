@@ -4,7 +4,7 @@ import math
 import pygame
 from dataclasses import dataclass
 from typing import List
-
+import matrix
 
 
 
@@ -44,7 +44,7 @@ def ProjectVertex(v):
                 (v.p[2].Coords[1]*fovConverter)/v.p[2].Coords[2],
                 v.p[2].Coords[2]])
         ])
-    
+
 def DrawVertex(v,color):
     
     pygame.draw.line(Graphics.window,
@@ -56,7 +56,8 @@ def DrawVertex(v,color):
 
     pygame.draw.line(Graphics.window,
         color,
-        (v.p[1].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],v.p[1].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]),
+        (v.p[1].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],
+        v.p[1].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]),
         (v.p[2].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],
         v.p[2].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]))
 
@@ -67,3 +68,34 @@ def DrawVertex(v,color):
         (v.p[0].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],
         v.p[0].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]))
 
+
+def FillVertex(v,color):
+    pygame.draw.polygon(Graphics.window,
+    color,
+    
+        [(v.p[0].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],v.p[0].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]),
+        (v.p[1].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],v.p[1].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]),
+        (v.p[2].Coords[0]*ScrMeshSize + ScrTranslationConstant[0],v.p[2].Coords[1]*ScrMeshSize + ScrTranslationConstant[1]),
+        
+        ])
+
+
+def Display3DMesh(Mesh):
+    for vertex in Mesh.v:
+
+        DrawVertex(ProjectVertex(vertex),(255,255,255))
+
+
+def CalculateVertexColor(Vertex,Normal,LightSource,Color):
+    ProjectedLight = matrix.vector([
+        Vertex.p[0].Coords[0] - LightSource.v[0],
+        Vertex.p[0].Coords[1] - LightSource.v[1],
+        Vertex.p[0].Coords[2] - LightSource.v[2]
+
+    ])
+
+    conversion = matrix.DotProduct(LightSource,Normal)
+    if(conversion < 0):
+        conversion = 0
+
+    return (Color[0]*conversion,Color[1]*conversion,Color[2]*conversion)

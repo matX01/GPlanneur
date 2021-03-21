@@ -200,6 +200,8 @@ for z in range(25,50,5):
         testFloor.v.append(Vtwo)
         
 print(len(testFloor.v))
+
+
 for vertex in cube.v:
     for points in vertex.p:
         for i in points.Coords:
@@ -329,10 +331,16 @@ while WHandler.ProgramRunning:
         DrawVertex(ProjectVertex(vertex),WHandler.White)
     
     """
+    """
     theta += math.pi/256
     for vertex in cube.v:
         
         DrawVertex(ProjectVertex(rotateVertex(vertex,Point([-5,0,5]),theta)),WHandler.White)
+    
+    """
+    for vertex in cube.v:
+        
+        DrawVertex(rotateVertex(vertex,Point([-5,0,5]),theta),WHandler.White)
     
     """
     if(WHandler.SpaceToken):

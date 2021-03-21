@@ -10,14 +10,22 @@ class mat3x3:
         
         self.m = mat
 
+    
+class vector:
+    v = []
 
-def multiplyMatrix(A,B):
+    def __init__(self,vector):
+
+        self.v = vector
+
+
+def MultiplyMatrix(A,B):
     
     return mat3x3([
+
         [A.m[0][0]*B.m[0][0]+A.m[0][1]*B.m[1][0]+A.m[0][2]*B.m[2][0],
         A.m[0][0]*B.m[0][1]+A.m[0][1]*B.m[1][1]+A.m[0][2]*B.m[2][1],
         A.m[0][0]*B.m[0][2]+A.m[0][1]*B.m[1][2]+A.m[0][2]*B.m[2][2]],
-
         
         
         [A.m[1][0]*B.m[0][0]+A.m[1][1]*B.m[1][0]+A.m[1][2]*B.m[2][0],
@@ -25,34 +33,62 @@ def multiplyMatrix(A,B):
         A.m[1][0]*B.m[0][2]+A.m[1][1]*B.m[1][2]+A.m[1][2]*B.m[2][2]],
 
 
-
         [A.m[2][0]*B.m[0][0]+A.m[2][1]*B.m[1][0]+A.m[2][2]*B.m[2][0],
         A.m[2][0]*B.m[0][1]+A.m[2][1]*B.m[1][1]+A.m[2][2]*B.m[2][1],
         A.m[2][0]*B.m[0][2]+A.m[2][1]*B.m[1][2]+A.m[2][2]*B.m[2][2]],
 
+    ])
+
+def AddMatrix(A,B):
+    return mat3x3([
+        [A.m[0][0]+B.m[0][0],A.m[0][1]+B.m[0][1],A.m[0][2]+B.m[0][2]],
+        [A.m[1][0]+B.m[1][0],A.m[1][1]+B.m[1][1],A.m[1][2]+B.m[1][2]],
+        [A.m[2][0]+B.m[2][0],A.m[2][1]+B.m[2][1],A.m[2][2]+B.m[2][2]],
+
 
     ])
-def multiplyMatrixPoint(A,B):
+
+
+def CrossProduct(A,B):
+    return vector([
+        A.v[1]*B.v[2] - A.v[2]*B.v[1],
+        A.v[2]*B.v[0] - A.v[0]*B.v[2],
+        A.v[0]*B.v[1] - A.v[1]*B.v[0]
+    ])
+def DotProduct(A,B):
     
-    return Mesh.Point([
-        A.Coords[0]*B.m[0][0]+A.Coords[1]*B.m[1][0]+A.Coords[2]*B.m[2][0],
-        A.Coords[0]*B.m[0][1]+A.Coords[1]*B.m[1][1]+A.Coords[2]*B.m[2][1],
-        A.Coords[0]*B.m[0][2]+A.Coords[1]*B.m[1][2]+A.Coords[2]*B.m[2][2],
-    ])
-"""
-def multiplyMatrixVertex(A,B):
+    return A.v[0]*B.v[0]+A.v[1]*B.v[1]+A.v[2]*B.v[2]
+
+
+
+
+
+
+
+
+
+
+
+
+def ConvertMatrixToVertex(A):
     return Mesh.Vertex([
-        multiplyMatrixPoint(A.p[0],B),
-        multiplyMatrixPoint(A.p[1],B),
-        multiplyMatrixPoint(A.p[2],B)
+
+        Mesh.Point([A.m[0][0],A.m[0][1],A.m[0][2]]),
+        Mesh.Point([A.m[1][0],A.m[1][1],A.m[1][2]]),
+        Mesh.Point([A.m[2][0],A.m[2][1],A.m[2][2]]),
+
     ])
-"""
-def multiplyMatrixVertex(A,B):
-    return Mesh.Vertex([
-        multiplyMatrixPoint(A.p[0],B),
-        multiplyMatrixPoint(A.p[1],B),
-        multiplyMatrixPoint(A.p[2],B),
+
+
+
+def ConvertVertexToMatrix(A):
+    return mat3x3([
+        [A.p[0].Coords[0],A.p[0].Coords[1],A.p[0].Coords[2]],
+        [A.p[1].Coords[0],A.p[1].Coords[1],A.p[1].Coords[2]],
+        [A.p[2].Coords[0],A.p[2].Coords[1],A.p[2].Coords[2]]
     ])
+    
+
 
 def PrintMatrix(A):
     for M in A.m:
@@ -63,6 +99,9 @@ def PrintVertex(A):
     for M in A.p:
         print(M.Coords)
     print("")
+
+
+
 
 def RotationMatrix(R,Theta):
     if(R == "X"):

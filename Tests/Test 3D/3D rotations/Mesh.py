@@ -17,7 +17,7 @@ class mesh:                                                                     
 
 
 cube = mesh([
-    #South
+    #Front
     Vertex([
         Point([0,0,0]),
         Point([0,1,0]),
@@ -29,7 +29,7 @@ cube = mesh([
         Point([1,0,0])
     ]),
     
-    #east
+    #Right
     Vertex([
         Point([1,0,0]),
         Point([1,1,0]),
@@ -41,19 +41,19 @@ cube = mesh([
         Point([1,0,1])
     ]),
     
-    #north
+    #Back
     Vertex([
         Point([1,0,1]),
         Point([1,1,1]),
         Point([0,0,1])
     ]),
     Vertex([
-        Point([1,0,1]),
+        Point([1,1,1]),
         Point([0,1,1]),
         Point([0,0,1])
     ]),
     
-    #west
+    #Left
     Vertex([
         Point([0,0,1]),
         Point([0,1,1]),
@@ -65,7 +65,7 @@ cube = mesh([
         Point([0,0,0])
     ]),
     
-    #top
+    #bottom
     Vertex([
         Point([0,1,0]),
         Point([0,1,1]),
@@ -77,7 +77,7 @@ cube = mesh([
         Point([1,1,0])
     ]),
     
-    #bottom
+    #top
     Vertex([
         Point([1,0,1]),
         Point([0,0,1]),
@@ -91,16 +91,17 @@ cube = mesh([
 ])
 
 square = mesh([
-    #South
+    
     Vertex([
         Point([0,0,0]),
         Point([0,1,0]),
         Point([1,1,0])
     ]),
+    
     Vertex([
         Point([0,0,0]),
-        Point([1,1,0]),
-        Point([1,0,0])
+        Point([1,0,0]),
+        Point([0,1,0])
     ])
 ])
 

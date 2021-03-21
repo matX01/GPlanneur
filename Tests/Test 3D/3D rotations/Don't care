@@ -1,0 +1,22 @@
+Normal = []
+
+    for vertex in cube2[0].v:
+
+        Normal.append(matrix.CrossProduct(
+            matrix.vector([vertex.p[1].Coords[0]-vertex.p[0].Coords[0],vertex.p[1].Coords[1]-vertex.p[0].Coords[1],vertex.p[1].Coords[2]-vertex.p[0].Coords[2]]),
+            matrix.vector([vertex.p[2].Coords[0]-vertex.p[0].Coords[0],vertex.p[2].Coords[1]-vertex.p[0].Coords[1],vertex.p[2].Coords[2]-vertex.p[0].Coords[2]])
+            ))
+    
+class vector:
+    v = []
+
+    def __init__(self,vector):
+
+        self.v = vector
+
+def CrossProduct(A,B):
+    return vector([
+        A.v[1]*B.v[2] - A.v[2]*B.v[1],
+        A.v[2]*B.v[0] - A.v[0]*B.v[2],
+        A.v[0]*B.v[1] - A.v[1]*B.v[0]
+    ])

@@ -6,11 +6,6 @@ window = None
 
 ProgramRunning = True 
 
-White = 255,255,255
-SpaceToken = False
-
-
-
 def init():
     
     global window
@@ -19,7 +14,10 @@ def init():
     pygame.init()
     window = pygame.display.set_mode(ScreenSize)
 
+def displayCenter():
 
+    pygame.draw.line(window,(255,0,0),((width/2-20),(height/2)),((width/2+20),(height/2)))
+    pygame.draw.line(window,(255,0,0),((width/2),(height/2-20)),((width/2),(height/2+20)))
 
 
 
