@@ -41,8 +41,18 @@ def HandleWindowEvents():
 
 
 oldTime = 0
+It = 0
 def PrintFPS():
+    global It
     global oldTime
-    print(1/(time.time()-oldTime))
+    It += 1
     
-    oldTime = time.time()
+    if(oldTime < time.time()*1000):
+        print(It)
+        It = 0
+        oldTime = time.time()*1000+ 1000
+    
+    
+    #print(1/(time.time()-oldTime))
+    
+    

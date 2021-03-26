@@ -13,9 +13,9 @@ from typing import List
 
 
 TranslationMatrix = matrix.mat3x3([
-    [0,0,5],
-    [0,0,5],
-    [0,0,5]
+    [0,0,2],
+    [0,0,2],
+    [0,0,2]
 
 ])
 
@@ -28,21 +28,24 @@ TranslationMatrix2 = matrix.mat3x3([
 ])
 
 
-Cam = matrix.vector([0,0,0])
-Light = matrix.vector([0,-0,-0.5])
+Cam = matrix.vector([1,0,0])
+Light = matrix.vector([0,-0,-1])
 
 Graphics.init()
 
 theta = math.pi/3
+spd = 0.01
 
+while Graphics.ProgramRunning :
 
-
-
-while Graphics.ProgramRunning:
-    
     cube2 = copy.deepcopy([Mesh.cube])
 
-    
+    Graphics.PrintFPS()
+
+    if(Graphics.SpaceToken):
+        pass
+    else:
+        theta += math.pi/512
 
     for i in range(len(cube2[0].v)):
 
@@ -89,15 +92,8 @@ while Graphics.ProgramRunning:
         Normal[len(Normal)-1].v[2] *= size
     
 
-    #Graphics.PrintFPS()
 
- 
-  
-    #print(theta)
-    if(Graphics.SpaceToken):
-        pass
-    else:
-        theta += math.pi/512
+
 
     for i in range(len(cube2[0].v)):
         ProjectedCam = matrix.vector([
@@ -115,8 +111,12 @@ while Graphics.ProgramRunning:
             
             #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,0,0))
     
-   
+
+    
 
     Graphics.HandleWindowEvents()
 
 
+
+
+ 
