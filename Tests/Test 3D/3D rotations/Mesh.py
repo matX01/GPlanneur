@@ -105,6 +105,49 @@ square = mesh([
     ])
 ])
 
+pyramid = mesh([
+    
+    Vertex([
+        Point([0,0,0]),
+        Point([1,0,0]),
+        Point([0,0,1])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([1,0,0]),
+        Point([0,0,1])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([1,0,0]),
+        Point([0,0,1])
+    ]),
+    Vertex([
+        Point([0,0,0]),
+        Point([1,0,0]),
+        Point([0.5,0.5,0.707])
+    ]),
+    Vertex([
+        Point([1,0,0]),
+        Point([1,0,1]),
+        Point([0.5,0.5,0.707])
+    ]),
+    Vertex([
+        Point([1,0,1]),
+        Point([0,0,1]),
+        Point([0.5,0.5,0.707])
+    ]),
+        Vertex([
+        Point([0,0,1]),
+        Point([1,0,0]),
+        Point([0.5,0.5,0.707])
+    ]),
+
+
+
+])
+
+
 ProjectedSquare = mesh([
     #South
     Vertex([

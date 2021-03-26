@@ -87,12 +87,6 @@ def Display3DMesh(Mesh):
 
 
 def CalculateVertexColor(Vertex,Normal,LightSource,Color):
-    ProjectedLight = matrix.vector([
-        Vertex.p[0].Coords[0] - LightSource.v[0],
-        Vertex.p[0].Coords[1] - LightSource.v[1],
-        Vertex.p[0].Coords[2] - LightSource.v[2]
-
-    ])
 
     conversion = matrix.DotProduct(LightSource,Normal)
     if(conversion < 0):

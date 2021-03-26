@@ -20,3 +20,32 @@ def CrossProduct(A,B):
         A.v[2]*B.v[0] - A.v[0]*B.v[2],
         A.v[0]*B.v[1] - A.v[1]*B.v[0]
     ])
+
+    
+def rotateVertex(vertex,point,Angle):
+    
+    Point1Module = math.sqrt((vertex.p[0].Coords[0]-point.Coords[0])**2+(vertex.p[0].Coords[1]-point.Coords[1])**2)
+    Point2Module = math.sqrt((vertex.p[1].Coords[0]-point.Coords[0])**2+(vertex.p[1].Coords[1]-point.Coords[1])**2)
+    Point3Module = math.sqrt((vertex.p[2].Coords[0]-point.Coords[0])**2+(vertex.p[2].Coords[1]-point.Coords[1])**2)
+    Point1BaseArg = 0
+    Point2BaseArg = 0
+    Point3BaseArg = 0
+    try:
+        Point1BaseArg = math.acos((vertex.p[0].Coords[0]-point.Coords[0])/Point1Module)
+    except:
+        pass
+    try:
+        Point2BaseArg = math.acos((vertex.p[1].Coords[0]-point.Coords[0])/Point2Module)
+    except:
+        pass
+    try:
+        Point3BaseArg = math.acos((vertex.p[2].Coords[0]-point.Coords[0])/Point3Module)
+    except:
+        pass
+    return Mesh.Vertex([
+    
+        Mesh.Point([Point1Module*math.cos(Point1BaseArg+Angle),Point1Module*math.sin(Point1BaseArg+Angle),vertex.p[0].Coords[2]]),
+        Mesh.Point([Point2Module*math.cos(Point2BaseArg+Angle),Point2Module*math.sin(Point2BaseArg+Angle),vertex.p[1].Coords[2]]),
+        Mesh.Point([Point3Module*math.cos(Point3BaseArg+Angle),Point3Module*math.sin(Point3BaseArg+Angle),vertex.p[2].Coords[2]])
+    
+    ])

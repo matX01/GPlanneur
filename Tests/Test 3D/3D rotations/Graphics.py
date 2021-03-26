@@ -6,6 +6,7 @@ window = None
 
 ProgramRunning = True 
 
+SpaceToken = False
 def init():
     
     global window
@@ -27,7 +28,7 @@ def HandleWindowEvents():
     
     pygame.display.flip()
     pygame.display.update()
-    window.fill(0)
+    window.fill((0,0,0))
     for event in pygame.event.get():
         if( event.type == pygame.QUIT):
             ProgramRunning = False
