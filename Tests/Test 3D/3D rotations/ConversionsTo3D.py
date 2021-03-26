@@ -86,7 +86,7 @@ def Display3DMesh(Mesh):
         DrawVertex(ProjectVertex(vertex),(255,255,255))
 
 
-def CalculateVertexColor(Vertex,Normal,LightSource,Color):
+def CalculateVertexColor(Normal,LightSource,Color):
 
     conversion = matrix.DotProduct(LightSource,Normal)
     if(conversion < 0):

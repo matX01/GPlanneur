@@ -7,22 +7,21 @@ import time
 
 
 ExecutionTime = 0
-TimeStep = 0.001
+TimeStep = 0.1
 
-A = [0,0,0,0]
-
+A = [0, 0, 0, 0]
 
 def begin():
     Physics.SetTimeStep(TimeStep)
     GraphicPane.begin(500,500)
-    WindowEvent.begin(10,1)
+    WindowEvent.begin(10,0.01)
 
 
 
 def __main__():
-    global A
     global ExecutionTime
     global TimeStep
+    global A
     
     if(time.time() >= ExecutionTime):
         ExecutionTime = time.time() + TimeStep
@@ -30,29 +29,11 @@ def __main__():
         A = Physics.ExecuteEuler(WindowEvent.YaxisValue)
     
   
-    GraphicPane.Display(WindowEvent.YaxisValue/100,A[3],A[2],A[1])
+    GraphicPane.Display(WindowEvent.YaxisValue,A[3],A[2],A[1])
     WindowEvent.Actualise()
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 begin()
 while True:

@@ -7,7 +7,6 @@ import math
 import copy
 from dataclasses import dataclass
 import time
-from numba import jit, cuda 
 from typing import List
 
 
@@ -20,33 +19,35 @@ TranslationMatrix = matrix.mat3x3([
 
 ])
 
+
 TranslationMatrix2 = matrix.mat3x3([
-    [-0.5,-0.5,-0.5],
-    [-0.5,-0.5,-0.5],
-    [-0.5,-0.5,-0.5]
+    [-.5,-.5,-.5],
+    [-.5,-.5,-.5],
+    [-.5,-.5,-.5]
 
 ])
 
 
 Cam = matrix.vector([0,0,0])
-Light = matrix.vector([0,-.66,-.75])
+Light = matrix.vector([0,-0,-0.5])
 
 Graphics.init()
 
-theta = 0
+theta = math.pi/3
+
 
 
 
 while Graphics.ProgramRunning:
     
-    Graphics.displayCenter()
-
     cube2 = copy.deepcopy([Mesh.cube])
 
     
 
     for i in range(len(cube2[0].v)):
 
+
+    
         #Calcul effectué : ((translationMatrix2 + cube2[0].v[i]) * RotationMatrix("X",theta)) + translationMatrix
         
         cube2[0].v[i] = matrix.ConvertMatrixToVertex(matrix.AddMatrix(TranslationMatrix2,matrix.ConvertVertexToMatrix(cube2[0].v[i])))
@@ -105,15 +106,16 @@ while Graphics.ProgramRunning:
             cube2[0].v[i].p[0].Coords[2] - Cam.v[2]
 
         ])
-
+    
         if(matrix.DotProduct(ProjectedCam,Normal[i]) < 0):
-          
-            Conversions.FillVertex(Conversions.ProjectVertex(cube2[0].v[i]),Conversions.CalculateVertexColor(cube2[0].v[i],Normal[i],Light,(255,255,255)))
-        #Conversions.DrawVertex(cube2[0].v[i],(255,0,0))
-            #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,255,255))
+            
+            Conversions.FillVertex(Conversions.ProjectVertex(cube2[0].v[i]),Conversions.CalculateVertexColor(Normal[i],Light,(255,255,255)))
+
+            #Conversions.DrawVertex(cube2[0].v[i],(255,255,255))
+            
+            #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,0,0))
     
    
-
 
     Graphics.HandleWindowEvents()
 

@@ -320,12 +320,12 @@ while WHandler.ProgramRunning:
     
 
     
-
+    """
     for vertex in testFloor.v:
         
         DrawVertex(ProjectVertex(vertex),(0,100,0))
         
-    
+    """
     for vertex in cube2[0].v:
         
         DrawVertex(ProjectVertex(vertex),WHandler.White)

@@ -37,24 +37,24 @@ def Display(positionY,vitesseVerticale,vx_new,h):
     global dirt
     global sky
  
-    rect_form=pygame.Rect(0,largeur/2+positionY,longueur,largeur)
+    rect_form=pygame.Rect(0,largeur/2+positionY*3,longueur,largeur)
     
     pygame.draw.rect(window_surface,dirt,rect_form)
     
-    rect_sky=pygame.Rect(0,0,longueur,largeur/2+positionY)
+    rect_sky=pygame.Rect(0,0,longueur,largeur/2+positionY*3)
     
     pygame.draw.rect(window_surface,sky,rect_sky)
     
-    pygame.draw.line(window_surface,black,[0,largeur/2+positionY],[longueur,largeur/2+positionY],5)
+    pygame.draw.line(window_surface,black,[0,largeur/2+positionY*3],[longueur,largeur/2+positionY*3],5)
 
     # display text
     
     
-    vitesse_verticale = arial_font.render('VS: {:.2f}'.format(vitesseVerticale), True, (0,0,0) )
+    vitesse_verticale = arial_font.render('Vz: {:.2f}'.format(vitesseVerticale), True, (0,0,0) )
     
     window_surface.blit(vitesse_verticale,(30,30))
 
-    vitesse_horizontal = arial_font.render('VH: {:.2f}'.format(vx_new), True, (0,0,0) )
+    vitesse_horizontal = arial_font.render('Vh: {:.2f}'.format(vx_new), True, (0,0,0) )
     
     window_surface.blit(vitesse_horizontal,(30,70))
 
@@ -65,7 +65,7 @@ def Display(positionY,vitesseVerticale,vx_new,h):
     window_surface.blit(Haltitude,(30,110))
  
 
-    assiette = arial_font.render('H: {:.2f}'.format(positionY), True, (0,0,0) )
+    assiette = arial_font.render('Theta: {:.2f}'.format(positionY), True, (0,0,0) )
     
     window_surface.blit(assiette,(30,160))
 
