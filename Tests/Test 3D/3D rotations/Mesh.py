@@ -161,3 +161,30 @@ ProjectedSquare = mesh([
         Point([(math.sqrt(3)/2),-1/2,0])
     ])
 ])
+
+
+
+
+def Load3DElement(Path):
+    f = open(Path,"r")
+    Points = []
+    MeshElement = mesh([])
+    for Line in f:
+        
+        SplitedVar = Line.split(" ")
+          
+        if(Line[0] == "v"):
+            
+            Points.append(Point([float(SplitedVar[1]),float(SplitedVar[2]),float(SplitedVar[3])]))
+        
+        if(Line[0] == "f"):
+           
+            MeshElement.v.append(Vertex([Points[int(SplitedVar[1])-1],Points[int(SplitedVar[2])-1],Points[int(SplitedVar[3])-1]]))
+
+
+
+    f.close()
+    
+
+
+    return MeshElement

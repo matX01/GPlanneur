@@ -6,6 +6,9 @@ window = None
 
 ProgramRunning = True 
 
+#ScreenZBuffering = [0 for i in range(width)][0 for j in range(height)]
+
+
 SpaceToken = False
 def init():
     
