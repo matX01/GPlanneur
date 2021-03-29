@@ -1,0 +1,156 @@
+Normal = []
+
+    for vertex in cube2[0].v:
+
+        Normal.append(matrix.CrossProduct(
+            matrix.vector([vertex.p[1].Coords[0]-vertex.p[0].Coords[0],vertex.p[1].Coords[1]-vertex.p[0].Coords[1],vertex.p[1].Coords[2]-vertex.p[0].Coords[2]]),
+            matrix.vector([vertex.p[2].Coords[0]-vertex.p[0].Coords[0],vertex.p[2].Coords[1]-vertex.p[0].Coords[1],vertex.p[2].Coords[2]-vertex.p[0].Coords[2]])
+            ))
+    
+class vector:
+    v = []
+
+    def __init__(self,vector):
+
+        self.v = vector
+
+def CrossProduct(A,B):
+    return vector([
+        A.v[1]*B.v[2] - A.v[2]*B.v[1],
+        A.v[2]*B.v[0] - A.v[0]*B.v[2],
+        A.v[0]*B.v[1] - A.v[1]*B.v[0]
+    ])
+
+    
+def rotateVertex(vertex,point,Angle):
+    
+    Point1Module = math.sqrt((vertex.p[0].Coords[0]-point.Coords[0])**2+(vertex.p[0].Coords[1]-point.Coords[1])**2)
+    Point2Module = math.sqrt((vertex.p[1].Coords[0]-point.Coords[0])**2+(vertex.p[1].Coords[1]-point.Coords[1])**2)
+    Point3Module = math.sqrt((vertex.p[2].Coords[0]-point.Coords[0])**2+(vertex.p[2].Coords[1]-point.Coords[1])**2)
+    Point1BaseArg = 0
+    Point2BaseArg = 0
+    Point3BaseArg = 0
+    try:
+        Point1BaseArg = math.acos((vertex.p[0].Coords[0]-point.Coords[0])/Point1Module)
+    except:
+        pass
+    try:
+        Point2BaseArg = math.acos((vertex.p[1].Coords[0]-point.Coords[0])/Point2Module)
+    except:
+        pass
+    try:
+        Point3BaseArg = math.acos((vertex.p[2].Coords[0]-point.Coords[0])/Point3Module)
+    except:
+        pass
+    return Mesh.Vertex([
+    
+        Mesh.Point([Point1Module*math.cos(Point1BaseArg+Angle),Point1Module*math.sin(Point1BaseArg+Angle),vertex.p[0].Coords[2]]),
+        Mesh.Point([Point2Module*math.cos(Point2BaseArg+Angle),Point2Module*math.sin(Point2BaseArg+Angle),vertex.p[1].Coords[2]]),
+        Mesh.Point([Point3Module*math.cos(Point3BaseArg+Angle),Point3Module*math.sin(Point3BaseArg+Angle),vertex.p[2].Coords[2]])
+    
+    ])
+
+
+    cube2 = copy.deepcopy([Mesh.cube])
+
+    
+
+    for i in range(len(cube2[0].v)):
+
+
+    
+        #Calcul effectué : ((translationMatrix2 + cube2[0].v[i]) * RotationMatrix("X",theta)) + translationMatrix
+        
+        cube2[0].v[i] = matrix.ConvertMatrixToVertex(matrix.AddMatrix(TranslationMatrix2,matrix.ConvertVertexToMatrix(cube2[0].v[i])))
+        
+        
+        cube2[0].v[i] = matrix.ConvertMatrixToVertex(
+            matrix.MultiplyMatrix(
+                matrix.ConvertVertexToMatrix(cube2[0].v[i]),
+                matrix.RotationMatrix("X",theta)))
+        cube2[0].v[i] = matrix.ConvertMatrixToVertex(
+            matrix.MultiplyMatrix(
+                matrix.ConvertVertexToMatrix(cube2[0].v[i]),
+                matrix.RotationMatrix("Y",theta)))
+        cube2[0].v[i] = matrix.ConvertMatrixToVertex(
+            matrix.MultiplyMatrix(
+                matrix.ConvertVertexToMatrix(cube2[0].v[i]),
+                matrix.RotationMatrix("Z",theta)))
+        
+        cube2[0].v[i] = matrix.ConvertMatrixToVertex(matrix.AddMatrix(TranslationMatrix,matrix.ConvertVertexToMatrix(cube2[0].v[i])))
+
+    Normal = []
+
+    for vertex in cube2[0].v:
+
+        Normal.append(matrix.CrossProduct(
+
+            matrix.vector([vertex.p[1].Coords[0]-vertex.p[0].Coords[0],
+            vertex.p[1].Coords[1]-vertex.p[0].Coords[1],
+            vertex.p[1].Coords[2]-vertex.p[0].Coords[2]]),
+
+            matrix.vector([vertex.p[2].Coords[0]-vertex.p[0].Coords[0],
+            vertex.p[2].Coords[1]-vertex.p[0].Coords[1],
+            vertex.p[2].Coords[2]-vertex.p[0].Coords[2]])
+            ))
+        
+        size = 1/math.sqrt((Normal[len(Normal)-1].v[0])**2 + (Normal[len(Normal)-1].v[1])**2 + (Normal[len(Normal)-1].v[2])**2)
+        Normal[len(Normal)-1].v[0] *= size
+        Normal[len(Normal)-1].v[1] *= size
+        Normal[len(Normal)-1].v[2] *= size
+    
+
+    #Graphics.PrintFPS()
+
+ 
+  
+    #print(theta)
+    if(Graphics.SpaceToken):
+        pass
+    else:
+        
+        theta += math.pi/512
+
+    for i in range(len(cube2[0].v)):
+        ProjectedCam = matrix.vector([
+            cube2[0].v[i].p[0].Coords[0] - Cam.v[0],
+            cube2[0].v[i].p[0].Coords[1] - Cam.v[1],
+            cube2[0].v[i].p[0].Coords[2] - Cam.v[2]
+
+        ])
+    
+        if(matrix.DotProduct(ProjectedCam,Normal[i]) < 0):
+            
+            Conversions.FillVertex(Conversions.ProjectVertex(cube2[0].v[i]),Conversions.CalculateVertexColor(Normal[i],Light,(255,255,255)))
+
+            #Conversions.DrawVertex(cube2[0].v[i],(255,255,255))
+            
+            #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,0,0))
+    
+   
+
+    Normal = []
+    NonSortedZ = []
+    SortedZ = []
+    NonSortedIndex = []
+    SortedIndex = []
+    for i in range(len(cube2[0].v)):
+
+        SortedZ.append((cube2[0].v[i].p[0].Coords[2] +cube2[0].v[i].p[1].Coords[2] + cube2[0].v[i].p[2].Coords[2])/3)
+        NonSortedZ.append(SortedZ[i])
+        NonSortedIndex.append(i)
+
+    SortedZ.sort(reverse=True)
+    
+    for E in SortedZ:
+        SortedIndex.append(NonSortedZ.index(E))
+    
+    #print(SortedIndex)
+    Cube3 = Mesh.mesh([])
+    for e in SortedIndex:
+
+        Cube3.v.append(cube2[0].v[e])
+    
+
+
+    cube2 = copy.deepcopy([Cube3])
