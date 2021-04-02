@@ -1,6 +1,5 @@
 import MoteurV2.Graphics as Graphics
 import MoteurV2.Mesh as Mesh
-print(Graphics.ScreenSize)
 import MoteurV2.ConversionsTo3D as Conversions
 import pygame
 import MoteurV2.matrix as matrix
@@ -38,7 +37,8 @@ def init(Pane):
 
 theta = math.pi/3
 spd = 0.01
-Test = Mesh.Load3DElement("Tests/Test Rassemblement des deux programmes/MoteurV2/Modèle.obj")
+
+Test = Mesh.Load3DElement("GPlanneur/Tests/Test Rassemblement des deux programmes/MoteurV2/Modèle.obj")
 
 #print(Test.v)
 def Disp(Y):

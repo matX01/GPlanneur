@@ -121,9 +121,9 @@ testFloor = mesh([])
 Ymove = 5
 oldTime = 0
 
-deplacementX = 0.0
-deplacementY = -0.0
-deplacementZ = 0.0
+deplacementX = 0.005
+deplacementY = 0
+deplacementZ = 0.1
 
 for z in range(1,10):
     step = 1
@@ -284,47 +284,37 @@ ui = True
 while WHandler.ProgramRunning:
     WHandler.HandleWindowEvents()
  
-    print(1/(time.time()-oldTime))
+    #print(1/(time.time()-oldTime))
     oldTime = time.time()
 
 
     
     WHandler.window.fill(0)
-    """
-    for vertex in cube2[0].v:
+    
+    for vertex in testFloor.v:
         for points in vertex.p:
             points.Coords[0] += deplacementX
             points.Coords[1] += deplacementY
             points.Coords[2] += deplacementZ
             #print(points.Coords[2])
 
-    if((cube.v[0].p[0].Coords[0] >=30) or (cube.v[0].p[0].Coords[0] <= -30)):
+    if((testFloor.v[0].p[0].Coords[0] >=30) or (testFloor.v[0].p[0].Coords[0] <= -30)):
         deplacementX = -deplacementX
-    if((cube.v[0].p[0].Coords[1] >= Ymove) or (cube.v[0].p[0].Coords[1] <= -10)):
+    if((testFloor.v[0].p[0].Coords[1] >= Ymove) or (testFloor.v[0].p[0].Coords[1] <= -10)):
         deplacementY = -deplacementY
-    if((cube.v[0].p[0].Coords[2] >= 50) or (cube.v[0].p[0].Coords[2] <= 2)):
+    if((testFloor.v[0].p[0].Coords[2] >= 25) or (testFloor.v[0].p[0].Coords[2] <= 0)):
         deplacementZ = -deplacementZ
     
-    
-    if(not(cube2[0].v[0].p[0].Coords[1] > 10)):
-        deplacementY += 9.81 * (time.time()-oldTime)
-    else:
-        
-        deplacementY = -deplacementY * 0.90
-      
 
     
-    if(deplacementZ > 0):
 
-        deplacementZ -= 0.005
-    
 
-    
-    """
+
     for vertex in testFloor.v:
         
         DrawVertex(ProjectVertex(vertex),(0,100,0))
-        
+    
+    
     """
     for vertex in cube2[0].v:
         
@@ -338,9 +328,7 @@ while WHandler.ProgramRunning:
         DrawVertex(ProjectVertex(rotateVertex(vertex,Point([-5,0,5]),theta)),WHandler.White)
     
     """
-    for vertex in cube.v:
-        
-        DrawVertex(rotateVertex(vertex,Point([-5,0,5]),theta),WHandler.White)
+
     
     """
     if(WHandler.SpaceToken):

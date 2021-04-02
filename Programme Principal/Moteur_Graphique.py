@@ -1,4 +1,3 @@
-import Moteur_Physique as ExecuteEuler
 import pygame
 
 window_surface = None
@@ -26,7 +25,7 @@ def begin(ScreenWidth,ScreenHeight):
     arial_font = pygame.font.SysFont("arial", 30)
     
     
-def Display(positionY,vitesseVerticale,vx_new,h):
+def Display(positionY,vitesseVerticale,vx_new,h,freins):
     
     
     global window_surface
@@ -50,28 +49,21 @@ def Display(positionY,vitesseVerticale,vx_new,h):
     # display text
     
     
-    vitesse_verticale = arial_font.render('Vz: {:.2f}'.format(vitesseVerticale), True, (0,0,0) )
+    vitesse_verticale = arial_font.render('Vz : {:.2f} m/s'.format(vitesseVerticale), True, (0,0,0) )
+    vitesse_horizontal = arial_font.render('Vh : {:.2f} km/h'.format(vx_new*3,6), True, (0,0,0) )
+    assiette = arial_font.render('θ: {:.2f}°'.format(positionY), True, (0,0,0) )
+    Haltitude = arial_font.render('H : {:.2f} m'.format(h), True, (0,0,0) )   
+    aerofreins = arial_font.render('af: {:.2f}%'.format(freins), True, (0,0,0) )
+    finesse = arial_font.render('f: {:.2f}'.format(abs(vx_new/vitesseVerticale)), True, (0,0,0) )
     
-    window_surface.blit(vitesse_verticale,(30,30))
-
-    vitesse_horizontal = arial_font.render('Vh: {:.2f}'.format(vx_new), True, (0,0,0) )
+    window_surface.blit(vitesse_verticale,(30,30))    
+    window_surface.blit(vitesse_horizontal,(30,70)) 
+    window_surface.blit(Haltitude,(30,110)) 
+    window_surface.blit(assiette,(30,160))  
+    window_surface.blit(aerofreins,(30,210))
+    window_surface.blit(finesse,(300,30))
     
-    window_surface.blit(vitesse_horizontal,(30,70))
-
-    
-    
-    Haltitude = arial_font.render('H: {:.2f}'.format(h), True, (0,0,0) )
-    
-    window_surface.blit(Haltitude,(30,110))
- 
-
-    assiette = arial_font.render('Theta: {:.2f}'.format(positionY), True, (0,0,0) )
-    
-    window_surface.blit(assiette,(30,160))
-
-
-   
-    
+       
     pygame.display.flip()
     
 

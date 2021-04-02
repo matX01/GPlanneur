@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import Gestionnaire_Evenement as WindowEvent
 TimeStep = 0
 
 
@@ -28,9 +29,9 @@ def Cz(alpha)  :
     #Cz est représenté par une fonction linéaire de l'angle a
     return 0.15*(alpha + 4)
 
-def Cx(alpha) :
+def Cx(alpha, AF) :
     #Cx est une fonction quadratique de Cz
-    return  0.03+0.01*(Cz(alpha)**2)
+    return  0.03+0.01*(Cz(alpha)**2) * (1 + 7*(AF/100))
 
 
 def ExecuteEuler(theta):
@@ -42,13 +43,15 @@ def ExecuteEuler(theta):
     global rho
     global h
     global A
+    global AF
     #on recupère les constantes
     
     gamma = np.arctan(A[3]/A[2])* 180 /np.pi
-    print(gamma)
+    
     #angle entre l'horizon et Va, dépend des vitesses Vx et Vy
     alpha = (theta - gamma) 
     #angle entre Va et l'axe horizontal de l'avion, dépend de theta défini par l'utilisateur
+    AF = WindowEvent.af
     
     vx_new = A[2]
     vy_new = A[3]
@@ -56,8 +59,8 @@ def ExecuteEuler(theta):
     va = np.sqrt((vx_new)**2 + (vy_new)**2)
     #on calcule la vitesse Va comme norme de (Vx,Vy)
     
-    ax_new = (1/m)*0.5*rho*S*(va**2)*((Cz(alpha)*np.sin((-gamma)/360*2*np.pi)-Cx(alpha)*np.cos((-gamma)/360*2*np.pi)))
-    ay_new = (1/m)*(0.5*rho*S*(va**2)*((Cz(alpha)*np.cos((-gamma)/360*2*np.pi)+Cx(alpha)*np.sin((-gamma)/360*2*np.pi)))-m*g)
+    ax_new = (1/m)*0.5*rho*S*(va**2)*((Cz(alpha)*np.sin((-gamma)/360*2*np.pi)-Cx(alpha, AF)*np.cos((-gamma)/360*2*np.pi)))
+    ay_new = (1/m)*(0.5*rho*S*(va**2)*((Cz(alpha)*np.cos((-gamma)/360*2*np.pi)+Cx(alpha, AF)*np.sin((-gamma)/360*2*np.pi)))-m*g)
     #on calcule les accélarations ax et ay d'après les équations du PFD 
     
     A_new = [vx_new, vy_new, ax_new, ay_new]
