@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 import matrix
-import DisplayHandling.MatGraph as MatGraph
+import MatGraph as MatGraph
 
 
 class vector:

@@ -1,7 +1,7 @@
 
 
-import Mesh.Mesh as Mesh
-import DisplayHandling.Graphics as Graphics
+import Mesh 
+import Graphics
 import matrix
 import math
 Sin = []

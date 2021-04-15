@@ -1,5 +1,5 @@
 import math
-import DisplayHandling.MatGraph as MatGraph
+import MatGraph as MatGraph
 class MatrixCalculusException(Exception):
     def __init__(self,E):
         print(E)

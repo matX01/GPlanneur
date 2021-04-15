@@ -36,7 +36,7 @@ def HandleWindowEvents():
     #pygame.display.update()
     #fpsClock.tick(FPS)
     window.fill((0,0,0))
-    PrintFPS()
+    #PrintFPS()
 
     
     for event in pygame.event.get():
