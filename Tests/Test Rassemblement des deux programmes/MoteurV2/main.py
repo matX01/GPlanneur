@@ -126,7 +126,7 @@ def Disp(Y):
         ])
     
         if(matrix.DotProduct(ProjectedCam,Normal[i]) < 0):
-            pass
+            
             Conversions.FillVertex(Conversions.ProjectVertex(cube2[0].v[i]),Conversions.CalculateVertexColor(Normal[i],Light,(255,255,255)))
         #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,255,255))
     

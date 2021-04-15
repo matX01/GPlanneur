@@ -11,10 +11,14 @@ import matrix
 
 
 
+ScreenList = []
 
 
+for i in range(Graphics.ScreenSize[1]+1):
+    ScreenList.append([10000 for i in range(Graphics.ScreenSize[0]+1)])
 
 
+print(len(ScreenList)," ",len(ScreenList[0]))
 
 ScrMeshSize = 100
 
@@ -70,6 +74,15 @@ def DrawVertex(v,color):
 
 
 def FillVertex(v,color):
+   
+
+    for El in v.p:
+        #print(int(El.Coords[1]*ScrMeshSize + ScrTranslationConstant[1])," ",int(El.Coords[0]*ScrMeshSize + ScrTranslationConstant[0]))
+        if ScreenList[int(El.Coords[1]*ScrMeshSize + ScrTranslationConstant[1])][int(El.Coords[0]*ScrMeshSize + ScrTranslationConstant[0])] < El.Coords[2]:
+            print("Vertex dumped")
+            return
+
+
     pygame.draw.polygon(Graphics.window,
     color,
     

@@ -19,7 +19,6 @@ from typing import List
 
 
 
-
 ScrMeshSize = 100
 
 ScrTranslationConstant = [Graphics.ScreenSize[0]/2,Graphics.ScreenSize[1]/2]
@@ -29,8 +28,6 @@ AspectRatio = Graphics.ScreenSize[0]/Graphics.ScreenSize[1]
 
 theta = 30*math.pi/180
 fovConverter = 1/math.tan(theta/2)
-
-
 
 
 def ProjectVertex(v):
@@ -48,6 +45,9 @@ def ProjectVertex(v):
                 (v.p[2].Coords[1]*fovConverter)/v.p[2].Coords[2],
                 v.p[2].Coords[2]])
         ])
+
+
+
 
 def DrawVertex(v,color):
     

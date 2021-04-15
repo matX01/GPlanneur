@@ -1,7 +1,16 @@
 from dataclasses import dataclass
 from typing import List
 import math
-import Mesh
+import Graphics as Graphics
+import Mesh as Mesh
+import ConversionsTo3D as Conversions
+import pygame
+import matrix as matrix
+import math
+import copy
+from dataclasses import dataclass
+import time
+from typing import List
 
 class mat3x3:
     m = [[]]

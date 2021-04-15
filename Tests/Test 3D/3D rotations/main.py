@@ -36,7 +36,7 @@ Graphics.init()
 
 theta = math.pi/3
 spd = 0.01
-Test = Mesh.Load3DElement("Tests/Test 3D/3D rotations/GAMIIIING.obj")
+Test = Mesh.Load3DElement("Gplanneur/Tests/Test 3D/3D rotations/GAMIIIING.obj")
 #print(Test.v)
 while Graphics.ProgramRunning :
     
@@ -75,6 +75,7 @@ while Graphics.ProgramRunning :
         cube2[0].v[i] = matrix.ConvertMatrixToVertex(matrix.AddMatrix(TranslationMatrix,matrix.ConvertVertexToMatrix(cube2[0].v[i])))
 
     Normal = []
+    
     NonSortedZ = []
     SortedZ = []
     NonSortedIndex = []
@@ -99,7 +100,7 @@ while Graphics.ProgramRunning :
 
 
     cube2 = copy.deepcopy([Cube3])
-
+    
     for vertex in cube2[0].v:
 
         Normal.append(matrix.CrossProduct(
@@ -135,8 +136,20 @@ while Graphics.ProgramRunning :
         #Conversions.DrawVertex(Conversions.ProjectVertex(cube2[0].v[i]),(255,255,255))
     
     Graphics.HandleWindowEvents()
+ 
+    """          
+    Conversions.ScreenList = []
 
 
+    for i in range(Graphics.ScreenSize[1]+1):
+        Conversions.ScreenList.append([10000 for i in range(Graphics.ScreenSize[0]+1)])
+
+
+
+
+
+        
+    """
 
 
  
