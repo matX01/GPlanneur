@@ -17,8 +17,22 @@ i = 0#compteur
 def begin():
     Physics.SetTimeStep(TimeStep)
     GraphicPane.begin(500,500)
-    WindowEvent.begin(10,0.01)
-
+    WindowEvent.begin(1,0.01)
+It = 0
+oldTime = 0
+def PrintFPS():
+    global It
+    global oldTime
+    It += 1
+    
+    if(oldTime < time.time()*1000):
+        
+        print(It)
+        
+        It = 0
+        oldTime = time.time()*1000+ 1000
+    
+    
 
 
 def __main__():
@@ -35,7 +49,7 @@ def __main__():
   
     GraphicPane.Display(WindowEvent.YaxisValue,A[3],A[2],A[1],WindowEvent.af)
     WindowEvent.Actualise()
- 
+    
 '''    
     if i%100 == 0 :
         plt.scatter(i,A[1], c='black')
@@ -53,5 +67,5 @@ def __main__():
 begin()
 while True:
     
-    __main__();
+    __main__()
 

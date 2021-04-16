@@ -7,18 +7,18 @@ import math
 
 
 def ProjectTriangle(T):
-        
+      
         return matrix.mat3x3([
-            [(T.m[0][0]*Graphics.fovConverter)/T.m[0][2],
-             (T.m[0][1]*Graphics.fovConverter)/T.m[0][2],
+            [(T.m[0][0]*Graphics.fovConverterX)/(T.m[0][2]),
+             (T.m[0][1]*Graphics.fovConverterY)/(T.m[0][2]),
              T.m[0][2]],
 
-            [(T.m[1][0]*Graphics.fovConverter)/T.m[1][2],
-             (T.m[1][1]*Graphics.fovConverter)/T.m[1][2],
+            [(T.m[1][0]*Graphics.fovConverterX)/(T.m[1][2]),
+             (T.m[1][1]*Graphics.fovConverterY)/(T.m[1][2]),
              T.m[1][2]],
 
-            [(T.m[2][0]*Graphics.fovConverter)/T.m[2][2],
-             (T.m[2][1]*Graphics.fovConverter)/T.m[2][2],
+            [(T.m[2][0]*Graphics.fovConverterX)/(T.m[2][2]),
+             (T.m[2][1]*Graphics.fovConverterY)/(T.m[2][2]),
              T.m[2][2]]
         ])
 

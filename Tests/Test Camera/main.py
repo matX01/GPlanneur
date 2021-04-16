@@ -83,8 +83,8 @@ def ProjectIntoMainReference(xvec,yvec,RefPos,PointToProject):
 theta = 0
 while DEBUG.ISRUNNING:
 
-    Position.p[0] += DEBUG.JoystickAxis[3]/32
-    Position.p[1] += DEBUG.JoystickAxis[2]/32
+    Position.p[0] += DEBUG.JoystickAxis[2]/64
+    Position.p[1] += DEBUG.JoystickAxis[3]/64
 
     theta += DEBUG.JoystickAxis[0]/64
     forwardVec = vector([math.cos(theta),math.sin(theta)])
@@ -107,8 +107,8 @@ while DEBUG.ISRUNNING:
     
 
     Graphics.DrawTriangle(m,(50,50,50),0)
-    Graphics.drawVector(Position,vector([forwardVec.v[0]*10,forwardVec.v[1]*10]),(0,0,255),(255,0,0),"forward")
-    Graphics.drawVector(Position,vector([downVec.v[0]*10,downVec.v[1]*10]),(0,255,0),(0,0,255),"down")
+    Graphics.drawVector(Position,vector([forwardVec.v[0]*1,forwardVec.v[1]*1]),(0,0,255),(255,0,0),"forward")
+    Graphics.drawVector(Position,vector([downVec.v[0]*1,downVec.v[1]*1]),(0,255,0),(0,0,255),"down")
     Graphics.drawAxis()
     #Graphics.drawPoint(Q2,(255,255,255),"Normalized Q2")
     #Graphics.drawPoint(Q,(255,255,255),"Q")

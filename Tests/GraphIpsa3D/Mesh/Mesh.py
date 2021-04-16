@@ -25,6 +25,14 @@ class vector:
 
         self.v = vector
 
+    def __str__(self):
+        ReturnValue = "[ "
+        for i in range(3):
+            ReturnValue += str(self.v[i]) + " "
+
+        return ReturnValue + "]"
+
+
 
 
 

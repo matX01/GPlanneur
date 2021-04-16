@@ -3,12 +3,14 @@ import pygame
 from Mesh import *
 import math
 import DisplayHandling.MatGraph
+import DEBUG
 ScreenSize = None
 ScrMeshSize = None
 ScrTranslationConstant = None
 AspectRatio = None
 theta = None
-fovConverter = None
+fovConverterX = None
+fovConverterY = None
 window = None
 
 
@@ -17,14 +19,18 @@ def initDisplayHandler(PanelToUse,ScrSize,ScreenMeshSize,FOV):
     global ScrTranslationConstant
     global AspectRatio
     global theta
-    global fovConverter
+    global fovConverterX
+    global fovConverterY
     global window
     global ScrMeshSize
+    
     ScrTranslationConstant = [ScrSize[0]/2,ScrSize[1]/2]
     AspectRatio = ScrSize[0]/ScrSize[1]
     ScrMeshSize = ScreenMeshSize
     theta = FOV
-    fovConverter = 1/math.tan(theta/2)
+    fovConverterX = 1/math.tan(theta/2)
+    fovConverterY = 1/math.tan(theta/2)
+
     ScreenSize = ScrSize
     window = PanelToUse
 
