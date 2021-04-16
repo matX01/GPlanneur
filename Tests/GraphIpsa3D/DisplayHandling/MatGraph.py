@@ -4,11 +4,10 @@ import Mesh.Mesh as Mesh
 import DisplayHandling.Graphics as Graphics
 import matrix
 import math
-Sin = []
-Cos = []
 
 
 def ProjectTriangle(T):
+        
         return matrix.mat3x3([
             [(T.m[0][0]*Graphics.fovConverter)/T.m[0][2],
              (T.m[0][1]*Graphics.fovConverter)/T.m[0][2],

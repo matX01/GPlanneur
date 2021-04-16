@@ -83,8 +83,8 @@ def ProjectIntoMainReference(xvec,yvec,RefPos,PointToProject):
 theta = 0
 while DEBUG.ISRUNNING:
 
-    Position.p[0] += DEBUG.JoystickAxis[2]/32
-    Position.p[1] += DEBUG.JoystickAxis[3]/32
+    Position.p[0] += DEBUG.JoystickAxis[3]/32
+    Position.p[1] += DEBUG.JoystickAxis[2]/32
 
     theta += DEBUG.JoystickAxis[0]/64
     forwardVec = vector([math.cos(theta),math.sin(theta)])

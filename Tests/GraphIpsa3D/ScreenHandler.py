@@ -47,7 +47,7 @@ def PaintingAlgorithm(M):
 
         NonSortedZ[i] = SortedZ[i] = ((M[i].m[0][2] +M[i].m[1][2] +M[i].m[2][2])/3)
         
-   
+    
 
     SortedZ.sort(reverse=True)
     #print(NonSortedIndex)
@@ -85,12 +85,13 @@ def FillMesh(M,color,Camera,LightSource,matView):
             Msh[i].m[0][2] - Cam.v[2]
 
         ])
+        """
         for j in range(3):
 
             Msh[i].m[j][0] =  matView.m[0][0] * Msh[i].m[j][0] + matView.m[1][0] * Msh[i].m[j][1] + matView.m[2][0] * Msh[i].m[j][2] 
             Msh[i].m[j][1] =  matView.m[0][1] * Msh[i].m[j][0] + matView.m[1][1] * Msh[i].m[j][1] + matView.m[2][1] * Msh[i].m[j][2] 
             Msh[i].m[j][2] =  matView.m[0][2] * Msh[i].m[j][0] + matView.m[1][2] * Msh[i].m[j][1] + matView.m[2][2] * Msh[i].m[j][2] 
-
+        """
         if(MatGraph.DotProduct(ProjectedCam,Normal[i]) <= 0):
 
             Graphics.DrawTriangle(MatGraph.ProjectTriangle(Msh[i]),MatGraph.CalculateTriangleColor(Normal[i],LightSource,color),0)
@@ -106,9 +107,9 @@ def FillMesh(M,color,Camera,LightSource,matView):
 Light = vector([0,0,-1])
 
 TranslationMatrix = matrix.mat3x3([
-        [0,0,20],
-        [0,0,20],
-        [0,0,20]
+        [0,0,6],
+        [0,0,6],
+        [0,0,6]
 
 ])
 
@@ -167,11 +168,13 @@ def main():
     DEBUG.HandleWindowEvents()
     theta = math.pi/6
     vtheta = 0
-    Test2 = Load3DElement("Tests/Graphipsa3D/MeshFiles/teapot.obj")
+    Test2 = Load3DElement("GPlanneur/Tests/Graphipsa3D/MeshFiles/GAMIIIING.obj")
     #Test2 = Load3DElement("Tests/Graphipsa3D/MeshFiles/teapot.obj")
-    #MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("X",theta))
-    #MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("Y",theta))
-    #MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("Z",theta))
+    """
+    MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("X",math.pi/6))
+    MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("Y",theta))
+    MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("Z",math.pi/6))
+    """
     print(len(Test2))
     
     
@@ -180,7 +183,7 @@ def main():
     #print(pygame.display.Info())
     while DEBUG.ISRUNNING:
 
-    
+        theta+= math.pi/256
         vLookDir = vector([0,0,1])
         
         vTarget = Cam + vLookDir
@@ -192,6 +195,9 @@ def main():
 
         
         Test = Test2.copy()
+        MatGraph.MultiplyMeshAndMatrix(Test,matrix.RotationMatrix("Y",theta))
+        MatGraph.MultiplyMeshAndMatrix(Test,matrix.RotationMatrix("X",math.pi/6))
+        MatGraph.MultiplyMeshAndMatrix(Test,matrix.RotationMatrix("Z",math.pi/6))
         """
         for i in range(len(Test)):
             for j in range(3):
