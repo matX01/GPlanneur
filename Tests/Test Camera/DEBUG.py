@@ -18,9 +18,13 @@ def init():
     global Offset
     #os.environ["SDL_VIDEO_DRIVER"] = "directx"
     pygame.init()
-    pygame.joystick.init()
-    joy = pygame.joystick.Joystick(0)
-    joy.init()
+    try:
+        pygame.joystick.init()
+        joy = pygame.joystick.Joystick(0)
+        joy.init()
+    except:
+        print("No joystick")
+        pass
     window = pygame.display.set_mode((ScreenSize),pygame.FULLSCREEN | pygame.DOUBLEBUF,16)
     HandleWindowEvents()
     for i in range(4):
@@ -47,9 +51,17 @@ def HandleWindowEvents():
         if(event.type == pygame.KEYDOWN):
             if(event.key == pygame.K_ESCAPE):
                 ISRUNNING = False
+    if (joy != None):
+        for i in range(4):
 
-    for i in range(4):
-        JoystickAxis[i] = joy.get_axis(i)-Offset[i]
+            JoystickAxis[i] = joy.get_axis(i)-Offset[i]
+
+       
+        for i in range(4):
+            if(JoystickAxis[i] <= 0.05 and JoystickAxis[i] >= -0.05):
+                
+                JoystickAxis[i] = 0
+
     #print(JoystickAxis)
 oldTime = 0
 It = 0

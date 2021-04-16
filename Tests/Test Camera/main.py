@@ -68,30 +68,54 @@ m = matrix.mat3x3([
 
 forwardVec = vector([1,0,0])
 downVec = vector([0,1,0])
-P = Point([3,3])
+P = Point([-3,-3])
+Position = Point([1,0])
+def ProjectIntoSubReference(xvec,yvec,RefPos,PointToProject):
+    
+    return Point([PointToProject.p[0] * xvec.v[0]+PointToProject.p[1] * yvec.v[0]+RefPos.p[0],PointToProject.p[0] * xvec.v[1]+PointToProject.p[1] * yvec.v[1]+RefPos.p[1]])
 
-def ProjectIntoSubReference(xvec,yvec,PointToProject):
-    return Point([PointToProject.p[0] * xvec.v[0]+PointToProject.p[1] * yvec.v[0],PointToProject.p[0] * xvec.v[1]+PointToProject.p[1] * yvec.v[1]])
+def ProjectIntoMainReference(xvec,yvec,RefPos,PointToProject):
+    det = 1/(xvec.v[0]*yvec.v[1]-xvec.v[1]*yvec.v[0])
+
+    return Point([det * (PointToProject.p[0] * yvec.v[1] - yvec.v[0]*PointToProject.p[1]+(yvec.v[0]*RefPos.p[1]-yvec.v[1]*RefPos.p[0])*det),det * (-PointToProject.p[0]*xvec.v[1] + PointToProject.p[1]*xvec.v[0]) + (xvec.v[1]*RefPos.p[0] - xvec.v[0]*RefPos.p[1])*det])
 
 
 theta = 0
 while DEBUG.ISRUNNING:
-    theta += math.pi/512
-    forwardVec = vector([2*math.cos(theta),math.sin(theta)])
+
+    Position.p[0] += DEBUG.JoystickAxis[2]/32
+    Position.p[1] += DEBUG.JoystickAxis[3]/32
+
+    theta += DEBUG.JoystickAxis[0]/64
+    forwardVec = vector([math.cos(theta),math.sin(theta)])
     downVec = vector([-math.sin(theta),math.cos(theta)])
 
-    Q = ProjectIntoSubReference(forwardVec,downVec,P)
-    print(Q)
+    Q = ProjectIntoSubReference(forwardVec,downVec,Position,P)
+    Q2 = ProjectIntoMainReference(forwardVec,downVec,Position,P)
+    m = matrix.mat3x3([
+        [Position.p[0],Position.p[1],0],
+        [Position.p[0]+math.cos(theta+math.pi/12)*10,Position.p[1]+math.sin(theta+math.pi/12)*10,0],
+        [Position.p[0]-math.sin(theta-math.pi/12)*10,Position.p[1]+math.cos(theta-math.pi/12)*10,0]
+
+    ])
+    #print(Q)
     
+    
+    PointAt = vector([(Q2.p[0]) , (Q2.p[1])])
+
+
+    
+
+    Graphics.DrawTriangle(m,(50,50,50),0)
+    Graphics.drawVector(Position,vector([forwardVec.v[0]*10,forwardVec.v[1]*10]),(0,0,255),(255,0,0),"forward")
+    Graphics.drawVector(Position,vector([downVec.v[0]*10,downVec.v[1]*10]),(0,255,0),(0,0,255),"down")
     Graphics.drawAxis()
-
-
-
-
-    Graphics.drawVector(Point([0,0]),forwardVec,(0,0,255),(255,0,0),"forward")
-    Graphics.drawVector(Point([0,0]),downVec,(0,255,0),(0,0,255),"down")
-    Graphics.drawPoint(P,(255,255,255),"P")
-    Graphics.drawPoint(Q,(255,255,255),"Q")
+    #Graphics.drawPoint(Q2,(255,255,255),"Normalized Q2")
+    #Graphics.drawPoint(Q,(255,255,255),"Q")
+    
+    if((PointAt.v[0]*0.26 < PointAt.v[1]) and (PointAt.v[1]*0.26< PointAt.v[0])):
+        #Graphics.drawPoint(Q2,(255,255,255),"Q'")
+        Graphics.drawPoint(P,(255,255,255),"P")
     #Graphics.DrawTriangle(m,(255,255,255),1)
     
 

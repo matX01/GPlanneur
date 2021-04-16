@@ -272,8 +272,8 @@ def rotateVertex(vertex,point,Angle):
 for vertex in cube.v:
         for points in vertex.p:
             points.Coords[2] += 5
-            points.Coords[0] -= 5
-            points.Coords[1] +=0
+            points.Coords[0] -= 2
+            points.Coords[1] += 2
     
 
 cube2 = copy.deepcopy([cube])
@@ -291,36 +291,18 @@ while WHandler.ProgramRunning:
     
     WHandler.window.fill(0)
     
-    for vertex in testFloor.v:
-        for points in vertex.p:
-            points.Coords[0] += deplacementX
-            points.Coords[1] += deplacementY
-            points.Coords[2] += deplacementZ
-            #print(points.Coords[2])
-
-    if((testFloor.v[0].p[0].Coords[0] >=30) or (testFloor.v[0].p[0].Coords[0] <= -30)):
-        deplacementX = -deplacementX
-    if((testFloor.v[0].p[0].Coords[1] >= Ymove) or (testFloor.v[0].p[0].Coords[1] <= -10)):
-        deplacementY = -deplacementY
-    if((testFloor.v[0].p[0].Coords[2] >= 25) or (testFloor.v[0].p[0].Coords[2] <= 0)):
-        deplacementZ = -deplacementZ
-    
-
-    
-
-
 
     for vertex in testFloor.v:
         
         DrawVertex(ProjectVertex(vertex),(0,100,0))
     
     
-    """
+    
     for vertex in cube2[0].v:
         
         DrawVertex(ProjectVertex(vertex),WHandler.White)
     
-    """
+    
     """
     theta += math.pi/256
     for vertex in cube.v:

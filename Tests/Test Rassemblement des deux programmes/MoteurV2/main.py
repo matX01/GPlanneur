@@ -38,7 +38,7 @@ def init(Pane):
 theta = math.pi/3
 spd = 0.01
 
-Test = Mesh.Load3DElement("GPlanneur/Tests/Test Rassemblement des deux programmes/MoteurV2/Modèle.obj")
+Test = Mesh.Load3DElement("Tests/Test Rassemblement des deux programmes/MoteurV2/Modèle.obj")
 
 #print(Test.v)
 def Disp(Y):

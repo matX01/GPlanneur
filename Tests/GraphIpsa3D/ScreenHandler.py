@@ -167,7 +167,7 @@ def main():
     DEBUG.HandleWindowEvents()
     theta = math.pi/6
     vtheta = 0
-    Test2 = Load3DElement("Tests/Graphipsa3D/MeshFiles/axis.obj")
+    Test2 = Load3DElement("Tests/Graphipsa3D/MeshFiles/teapot.obj")
     #Test2 = Load3DElement("Tests/Graphipsa3D/MeshFiles/teapot.obj")
     #MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("X",theta))
     #MatGraph.MultiplyMeshAndMatrix(Test2,matrix.RotationMatrix("Y",theta))
@@ -192,21 +192,21 @@ def main():
 
         
         Test = Test2.copy()
-
+        """
         for i in range(len(Test)):
             for j in range(3):
 
                 Test[i].m[j][0] =  matView.m[0][0] * Test[i].m[j][0] + matView.m[1][0] * Test[i].m[j][1] + matView.m[2][0] * Test[i].m[j][2] 
                 Test[i].m[j][1] =  matView.m[0][1] * Test[i].m[j][0] + matView.m[1][1] * Test[i].m[j][1] + matView.m[2][1] * Test[i].m[j][2] 
                 Test[i].m[j][2] =  matView.m[0][2] * Test[i].m[j][0] + matView.m[1][2] * Test[i].m[j][1] + matView.m[2][2] * Test[i].m[j][2] 
-
+        """
 
         MatGraph.AddMeshAndMatrix(Test,TranslationMatrix)
 
-        #FillMesh(Test,(255,255,255),Cam,Light,matView)
+        FillMesh(Test,(255,255,255),Cam,Light,matView)
         
   
-        DrawMesh(Test,(255,255,255))
+        #DrawMesh(Test,(255,255,255))
 
 
 
