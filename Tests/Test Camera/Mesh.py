@@ -11,19 +11,19 @@ class vector:
         return vector([
         self.v[0] - B.v[0],
         self.v[1] - B.v[1],
-        self.v[2] - B.v[2]
         ])
 
     def __mul__(self,B):
-        return (vector([self.v[0]*B,self.v[1]*B,self.v[2]*B]))
+        return (vector([self.v[0]*B,self.v[1]*B]))
     
     def __add__(self,B):
 
-        return (vector([self.v[0] + B.v[0],self.v[1] + B.v[1],self.v[2] + B.v[2]]))
+        return (vector([self.v[0] + B.v[0],self.v[1] + B.v[1]]))
 
     def __init__(self,vector):
 
         self.v = vector
+        
 
 
 

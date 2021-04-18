@@ -202,9 +202,9 @@ def main():
 
       
         
-      
+        Cam.v[0] -= DEBUG.JoystickAxis[2]/16
         
-        
+        """
         Cam.v[0] -= DEBUG.JoystickAxis[2]/16
         theta += DEBUG.JoystickAxis[0]/64
         phi -= DEBUG.JoystickAxis[1]/64
@@ -215,11 +215,13 @@ def main():
 
         #print(Cam)
         vTarget = ([0,0,1])
-        vLookDir = vector([-math.sin(theta),math.cos(theta)*math.sin(phi),math.cos(theta)*math.cos(phi)])
+        vLookDir = vector([-math.sin(theta),math.cos(theta)*math.sin(phi),math.cos(theta)*math.cos(phi)])"""
         vTarget = Cam + vLookDir
         
+
+
         #print(vTarget)
-        matView = LookatMatrix(PointAt(Cam,vTarget,vUp))
+        matView = LookAtMatrix(PointAt(Cam,vTarget,vUp))
      
         
         Test = Test2.copy()
