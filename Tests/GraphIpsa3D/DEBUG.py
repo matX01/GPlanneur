@@ -8,7 +8,7 @@ FPS = 190 # frames per second setting
 Offset = [0,0,0,0]
 JoystickAxis = [0 for i in range(4)]
 joy = None
-AspectRatio = height/width
+
 
 def init():
     global window
@@ -35,7 +35,7 @@ def HandleWindowEvents():
     pygame.display.flip()
     #pygame.display.update()
     #fpsClock.tick(FPS)
-    window.fill((0,0,0))
+    window.fill((135,206,235))
     PrintFPS()
 
     

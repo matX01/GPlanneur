@@ -5,21 +5,23 @@ import DisplayHandling.Graphics as Graphics
 import matrix
 import math
 
-
+#trsl = (2*1000*1)/(1000-1)
+trsl = 1
 def ProjectTriangle(T):
       
         return matrix.mat3x3([
-            [(T.m[0][0]*Graphics.fovConverterX)/(T.m[0][2]),
-             (T.m[0][1]*Graphics.fovConverterY)/(T.m[0][2]),
+            [(T.m[0][0]*Graphics.fovConverterX)/(T.m[0][2]*trsl),
+             (T.m[0][1]*Graphics.fovConverterY)/(T.m[0][2]*trsl),
              T.m[0][2]],
 
-            [(T.m[1][0]*Graphics.fovConverterX)/(T.m[1][2]),
-             (T.m[1][1]*Graphics.fovConverterY)/(T.m[1][2]),
+            [(T.m[1][0]*Graphics.fovConverterX)/(T.m[1][2]*trsl),
+             (T.m[1][1]*Graphics.fovConverterY)/(T.m[1][2]*trsl),
              T.m[1][2]],
 
-            [(T.m[2][0]*Graphics.fovConverterX)/(T.m[2][2]),
-             (T.m[2][1]*Graphics.fovConverterY)/(T.m[2][2]),
-             T.m[2][2]]
+            [(T.m[2][0]*Graphics.fovConverterX)/(T.m[2][2]*trsl),
+             (T.m[2][1]*Graphics.fovConverterY)/(T.m[2][2]*trsl),
+             (T.m[2][2])]
+
         ])
 
 

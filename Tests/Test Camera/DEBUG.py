@@ -36,6 +36,7 @@ def HandleWindowEvents():
     global SpaceToken
     global ISRUNNING
     global JoystickAxis
+    global Offset
     pygame.display.flip()
     #pygame.display.update()
     #fpsClock.tick(FPS)
@@ -47,10 +48,19 @@ def HandleWindowEvents():
         if( event.type == pygame.QUIT):
             
             ISRUNNING = False
+        elif event.type == pygame.JOYBUTTONDOWN:
+            if(joy.get_button(0)):
 
-        if(event.type == pygame.KEYDOWN):
+                for i in range(4):
+                    
+                    Offset[i] = joy.get_axis(i)
+        
+
+        elif(event.type == pygame.KEYDOWN):
             if(event.key == pygame.K_ESCAPE):
                 ISRUNNING = False
+        
+        
     if (joy != None):
         for i in range(4):
 

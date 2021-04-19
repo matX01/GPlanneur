@@ -5,8 +5,11 @@ import MatGraph
 import math
 from Mesh import *
 import random
+from typing import List
+from dataclasses import dataclass
+import threading
 DEBUG.init()
-Graphics.initDisplayHandler(DEBUG.window,(1920,1080),100,70*math.pi/180)
+Graphics.initDisplayHandler(DEBUG.window,(1920,1080),100,30*math.pi/180)
 
 
 def PointAt(pos,target,up):
@@ -59,15 +62,14 @@ class Point:
         for El in self.p:
             returnValue += str(El) + " "
         return returnValue + "]"
-       
 
-
+"""
 m = matrix.mat3x3([
     [1,1,0],
     [1,2,0],
     [2,1,0]
 ])
-
+"""
 
 
 def ProjectIntoSubReference(xvec,yvec,RefPos,PointToProject):
@@ -87,13 +89,55 @@ CameraPosition = Point([0,0])
 LookingVector = vector([1,0])
 DownVec = vector([0,1])
 
-theta = 0
+Msh = []
+Step = 1
+Size = 10
+for i in range(-Size,Size,Step):
+    for j in range(-Size,Size,Step):
+        sq1 = matrix.mat3x3([
+            [i,j,0],
+            [i+Step,j,0],
+            [i,j+Step,0]
+        ])
+        sq2 = matrix.mat3x3([
+            [i+Step,j,0],
+            [i+Step,j+Step,0],
+            [i,j+Step,0]
+        ])
+        Msh.append(sq1)
+        Msh.append(sq2)
 
+def DotProduct(A,B):
+    
+    return A.v[0]*B.v[0]+A.v[1]*B.v[1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+theta = 0
+"""
 CLOUDY = []
 
-for i in range (50):
-    CLOUDY.append(Point([random.randint(-10,10),random.randint(-10,10)]))
-
+for i in range (250):
+    CLOUDY.append(Point([random.randint(-20,20),random.randint(-20,20)]))
+"""
 def actualiseCameraPosition():
     global CameraPosition
     global LookingVector
@@ -103,6 +147,58 @@ def actualiseCameraPosition():
     theta += DEBUG.JoystickAxis[2]/32
     LookingVector = vector([math.cos(theta),math.sin(theta)])
     DownVec = vector([-math.sin(theta),math.cos(theta)])
+
+
+
+def CalculateTriangle(Point1,Point2,Point3):
+    PointsOutsideOfRay = []
+    PointsInsideOfRay = []
+
+    for El in [Point1,Point2,Point3]:
+        if(El.p[1] < 0):
+            PointsOutsideOfRay.append(El)
+        else:
+            PointsInsideOfRay.append(El)
+    if(len(PointsOutsideOfRay) >= 2):
+        return
+    if(len(PointsOutsideOfRay) == 0):
+        
+        return [matrix.mat3x3([
+                [Point1.p[0],Point1.p[1],0],
+                [Point2.p[0],Point2.p[1],0],
+                [Point3.p[0],Point3.p[1],0]
+        ])]
+    if(len(PointsOutsideOfRay) == 1):
+
+        A1 = PointsOutsideOfRay[0].p[1]-PointsInsideOfRay[0].p[1]
+        B1 = PointsOutsideOfRay[0].p[0]-PointsInsideOfRay[0].p[0]
+        C1 = A1 * PointsOutsideOfRay[0].p[0] + B1 * PointsOutsideOfRay[0].p[1]
+        A2 = 0
+        B2 = 100
+        C2 = 0
+        den = A1 * B2 - A2 * B1
+
+    
+        IntersectionA = Point([(B2 * C1 - B1 * C2)/den,(A1 * C2 - A2 * C1)/den])
+        
+        Graphics.drawPoint(IntersectionA,(255,0,0),"")
+        
+
+
+        return [matrix.mat3x3([
+                [Point1.p[0],Point1.p[1],0],
+                [Point2.p[0],Point2.p[1],0],
+                [Point3.p[0],Point3.p[1],0]
+        ])]
+          
+
+   
+
+
+
+
+
+
 
 while DEBUG.ISRUNNING:
 
@@ -117,28 +213,52 @@ while DEBUG.ISRUNNING:
     
     CLOUDYProjected = []
 
+    """
     for El in CLOUDY:
         bt = ProjectIntoMainReference(NewForwardVec,DownVec,CameraPosition,El)
         CLOUDYProjected.append(bt)
     
-    
-
-    Q = ProjectIntoSubReference(CameraVector,DownVec,CameraPosition,P)
-    Q2 = ProjectIntoMainReference(CameraVector,DownVec,CameraPosition,Q)
-
     for i in range(len(CLOUDYProjected)):
         Graphics.drawPoint(CLOUDYProjected[i],(255,255,255),("Q"+str(i)))
-
+    """
     
+    """
+    ProjectedMesh = []
+    for El in Msh:
+        Pnt1 = ProjectIntoMainReference(NewForwardVec,DownVec,CameraPosition,Point([El.m[0][0],El.m[0][1]]))
+        Pnt2 = ProjectIntoMainReference(NewForwardVec,DownVec,CameraPosition,Point([El.m[1][0],El.m[1][1]]))
+        Pnt3 = ProjectIntoMainReference(NewForwardVec,DownVec,CameraPosition,Point([El.m[2][0],El.m[2][1]]))
+
+        #if(Pnt1.p[1] > 0 and Pnt2.p[1] > 0 and Pnt3.p[1] > 0 and Pnt1.p[1] < 5.4 and Pnt2.p[1] < 5.4 and Pnt3.p[1] < 5.4 and Pnt1.p[0] <  0.7 *  Pnt1.p[1] and Pnt2.p[0] <  0.7 *  Pnt2.p[1] and Pnt3.p[0] <  0.7 *  Pnt3.p[1] and Pnt1.p[0] > - 0.7 *  Pnt1.p[1] and Pnt2.p[0] > -0.7 *  Pnt2.p[1] and Pnt3.p[0] > -0.7 *  Pnt3.p[1]):
+        s = CalculateTriangle(Pnt1,Pnt2,Pnt3)
+        try:
+            for El in s:
+                
+                ProjectedMesh.append(El)
+        except:
+            pass
+
+    Graphics.DrawTriangle(matrix.mat3x3([
+        [0,0,0],
+        [-3.78,5.4,0],
+        [3.78,5.4,0]
+    ]),(100,100,100),0)
+
+
+
+    for El in ProjectedMesh:
+
+            Graphics.DrawTriangle(El,(255,255,255),1)
+    """
 
     Graphics.drawVector(Point([0,0]),NewForwardVec,(255,0,0),(0,255,255),"Cam")
-    Graphics.drawVector(Point([0,0]),DownVec,(255,0,0),(0,255,255),"DOWN")
+    #Graphics.drawVector(Point([0,0]),DownVec,(255,0,0),(0,255,255),"DOWN")
     Graphics.drawAxis()
     #Graphics.drawPoint(P,(255,255,255),"P")
     
     
     
     
-    
+    DEBUG.PrintFPS()
     actualiseCameraPosition()
     DEBUG.HandleWindowEvents()
