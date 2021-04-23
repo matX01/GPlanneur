@@ -1,11 +1,11 @@
 import sys
 sys.path.append('.')
-from Mesh.Mesh import *
-import DisplayHandling.Graphics as Graphics
-import DisplayHandling.MatGraph as MatGraph
+from GraphIpsa3D.Mesh.Mesh import *
+import GraphIpsa3D.DisplayHandling.Graphics as Graphics
+import GraphIpsa3D.DisplayHandling.MatGraph as MatGraph
 import math
 import copy
-import matrix
+import GraphIpsa3D.matrix as matrix
 import pygame
 import threading
 
@@ -242,8 +242,8 @@ def main():
 
     sol = []
     
-    Step = 2
-    Size = 30
+    Step = 1
+    Size = 50
     for i in range(-Size,Size,Step):
         for j in range(-Size,Size,Step):
             sq1 = matrix.mat3x3([
@@ -287,7 +287,7 @@ def main():
 
     
     
-    Cam = vector([0,0,0])
+    Cam = vector([0,10,0])
     vUp = vector([0,1,0])
     vLookDir = vector([0,0,1])
     vTarget = vector([0,0,1])
@@ -347,7 +347,7 @@ def main():
 
 
 
-        for i in range(-30,30,Step):
+        for i in range(-10,10,Step):
             for j in range(offset,Size+offset,Step):
             
                 sq1 = matrix.mat3x3([
@@ -390,13 +390,13 @@ def main():
 
 
 
-def Init():
-    DEBUG.init()
-    Graphics.initDisplayHandler(DEBUG.window,DEBUG.ScreenSize,100,15*math.pi/180)
+def Init(screen):
+ 
+    Graphics.initDisplayHandler(screen,(1920,1080),100,15*math.pi/180)
 
 
 
-def Affichage(phi,HorizontalSpeed,VerticalSpeed):
+def Affichage(phi,ZPos,YPos,window):
     global vLookDir
     global vForward
     global Cam
@@ -407,12 +407,12 @@ def Affichage(phi,HorizontalSpeed,VerticalSpeed):
     global Size
     global Step
     global vTarget
-    vForward = vector([0,VerticalSpeed,HorizontalSpeed])
+    #vForward = vector([0,VerticalSpeed,HorizontalSpeed])
 
 
 
     
-    Cam += vForward
+    Cam = vector([0,YPos,ZPos])
     
     #print(Cam)
     #vTarget = ([0,0,1])
@@ -425,7 +425,7 @@ def Affichage(phi,HorizontalSpeed,VerticalSpeed):
     subMat = PointAt(Cam,vTarget,vUp)
 
     mtView = LookAtMatrix(subMat)
-    print(mtView.m)
+   
     sol = []
 
     #print(offset)
@@ -438,7 +438,7 @@ def Affichage(phi,HorizontalSpeed,VerticalSpeed):
 
 
 
-    for i in range(-30,30,Step):
+    for i in range(-20,20,Step):
         for j in range(offset,Size+offset,Step):
         
             sq1 = matrix.mat3x3([
@@ -448,10 +448,11 @@ def Affichage(phi,HorizontalSpeed,VerticalSpeed):
             ])
 
             sol.append(sq1)
-    print()
+ 
 
     FillMesh(sol,(255,255,255),Cam,Light,mtView)
-
+    pygame.display.flip()
+    window.fill((135,206,235))
 
 
 

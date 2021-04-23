@@ -32,7 +32,7 @@ def Actualise():           #méthode pour actualiser les actions sur le clavier 
 
     global YaxisValue
     global af
-    
+ 
     
     for event in pygame.event.get():
         
@@ -58,4 +58,5 @@ def Actualise():           #méthode pour actualiser les actions sur le clavier 
                 
                 if af > 0:
                     af -= afstep
-                    
+            if event.key == pygame.K_ESCAPE: 
+                pygame.quit()

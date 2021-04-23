@@ -9,7 +9,7 @@ m=500 #masse du planeur (kg)
 g=9.81 #constante gravitationelle (m3 kg−1 s−2) orienté vers le bas
 rho = 1.3 #masse volumique de l'air (kg m-3)
 S = 16 #surface alaire du planeur (m2)
-h = 0.1 #pas d'Euler
+h = 0.01 #pas d'Euler
 
 A = [0,1000,30,-1]
 #matrice initiale contenant [X, Z, Vx, Vy]

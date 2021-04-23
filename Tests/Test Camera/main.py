@@ -144,7 +144,7 @@ def actualiseCameraPosition():
     global theta
     global DownVec
 
-    theta += DEBUG.JoystickAxis[2]/32
+    theta += DEBUG.JoystickAxis[3                                                                                                                                                         ]/32
     LookingVector = vector([math.cos(theta),math.sin(theta)])
     DownVec = vector([-math.sin(theta),math.cos(theta)])
 

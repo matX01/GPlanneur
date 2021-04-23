@@ -4,11 +4,11 @@ import Moteur_Physique as Physics
 import time
 from matplotlib import pyplot as plt
 import numpy as np
-
-
+import GraphIpsa3D.ScreenHandler as ScreenHandler
+import math
 
 ExecutionTime = 0
-TimeStep = 0.1
+TimeStep = 0.01
 
 A = [0, 0, 0, 0]
 
@@ -16,8 +16,10 @@ i = 0#compteur
 
 def begin():
     Physics.SetTimeStep(TimeStep)
-    GraphicPane.begin(500,500)
-    WindowEvent.begin(1,0.01)
+    GraphicPane.begin(1920,1080)
+    WindowEvent.begin(1,0.1)
+    ScreenHandler.Init(GraphicPane.window_surface)
+
 It = 0
 oldTime = 0
 def PrintFPS():
@@ -46,8 +48,9 @@ def __main__():
  
         A = Physics.ExecuteEuler(WindowEvent.YaxisValue)
     
-  
+    PrintFPS()
     GraphicPane.Display(WindowEvent.YaxisValue,A[3],A[2],A[1],WindowEvent.af)
+    ScreenHandler.Affichage(-WindowEvent.YaxisValue*math.pi/180,A[0]/1,(-A[1]/1)+990,GraphicPane.window_surface)
     WindowEvent.Actualise()
     
 '''    

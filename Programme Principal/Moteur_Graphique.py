@@ -21,7 +21,7 @@ def begin(ScreenWidth,ScreenHeight):
     longueur = ScreenWidth
     
     pygame.init()
-    window_surface = pygame.display.set_mode(size=(ScreenWidth,ScreenHeight))
+    window_surface = pygame.display.set_mode((ScreenWidth,ScreenHeight),pygame.FULLSCREEN | pygame.DOUBLEBUF,16)
     arial_font = pygame.font.SysFont("arial", 30)
     
     
@@ -36,15 +36,15 @@ def Display(positionY,vitesseVerticale,vx_new,h,freins):
     global dirt
     global sky
  
-    rect_form=pygame.Rect(0,largeur/2+positionY*3,longueur,largeur)
+    #rect_form=pygame.Rect(0,largeur/2+positionY*3,longueur,largeur)
     
-    pygame.draw.rect(window_surface,dirt,rect_form)
+    #pygame.draw.rect(window_surface,dirt,rect_form)
     
-    rect_sky=pygame.Rect(0,0,longueur,largeur/2+positionY*3)
+    #rect_sky=pygame.Rect(0,0,longueur,largeur/2+positionY*3)
     
-    pygame.draw.rect(window_surface,sky,rect_sky)
+    #pygame.draw.rect(window_surface,sky,rect_sky)
     
-    pygame.draw.line(window_surface,black,[0,largeur/2+positionY*3],[longueur,largeur/2+positionY*3],5)
+   #pygame.draw.line(window_surface,black,[0,largeur/2+positionY*3],[longueur,largeur/2+positionY*3],5)
 
     # display text
     
@@ -64,7 +64,7 @@ def Display(positionY,vitesseVerticale,vx_new,h,freins):
     window_surface.blit(finesse,(300,30))
     
        
-    pygame.display.flip()
+    #pygame.display.flip()
     
 
 def display(a,b,c,d):
