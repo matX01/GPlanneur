@@ -42,7 +42,8 @@ def __main__():
     global TimeStep
     global A
     global i
-    
+    delta_time=time.time()-begin_time
+    begin_time=time.time()
     if(time.time() >= ExecutionTime):
         ExecutionTime = time.time() + TimeStep
  
